@@ -54,4 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
         itemDao.insertAll(item1, item2, item3);
     }
+
+    public ItemDao getItemDao() { return itemDao; }
 }

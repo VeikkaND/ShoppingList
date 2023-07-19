@@ -6,6 +6,13 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class Item {
+    public Item() {
+
+    }
+    public Item(String name, String unit) {
+        this.itemName = name;
+        this.unitType = unit;
+    }
     @PrimaryKey(autoGenerate = true)
     public int itemId;
 
