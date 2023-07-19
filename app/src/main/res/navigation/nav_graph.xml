@@ -9,12 +9,15 @@
         android:id="@+id/home2"
         android:name="com.example.shoppinglist.Home"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home">
-    </fragment>
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/newList"
         android:name="com.example.shoppinglist.newList"
         android:label="fragment_new_list"
-        tools:layout="@layout/fragment_new_list">
-    </fragment>
+        tools:layout="@layout/fragment_new_list" />
+    <fragment
+        android:id="@+id/newItem"
+        android:name="com.example.shoppinglist.newItem"
+        android:label="fragment_new_item"
+        tools:layout="@layout/fragment_new_item" />
 </navigation>

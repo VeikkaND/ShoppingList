@@ -29,6 +29,15 @@ public class newList extends Fragment {
         newItemButton = view.findViewById(R.id.newItemButton);
         backButton = view.findViewById(R.id.backButton);
 
+
+        newItemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = Navigation.findNavController(view);
+                navController.navigate(R.id.newItem);
+            }
+        });
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
