@@ -12,7 +12,10 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.shoppinglist.adapters.ListAdapter;
 import com.example.shoppinglist.entities.List;
 
 import java.text.SimpleDateFormat;
@@ -21,6 +24,7 @@ import java.util.Date;
 
 public class Home extends Fragment {
     Button newButton;
+    RecyclerView rvLists;
 
     public Home() {
         super(R.layout.fragment_home);
@@ -57,6 +61,10 @@ public class Home extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstance) {
-        // do recyclerViewStuff
+        rvLists = view.findViewById(R.id.rvLists);
+        List[] dataset = MainActivity.db.listDao().getAll();
+
+        rvLists.setAdapter(new ListAdapter(dataset));
+        rvLists.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 }
