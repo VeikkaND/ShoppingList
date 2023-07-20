@@ -13,6 +13,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.shoppinglist.entities.List;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Home extends Fragment {
     Button newButton;
 
@@ -30,8 +36,19 @@ public class Home extends Fragment {
         newButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //create a new list in DB
+                Date time = Calendar.getInstance().getTime();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                String currentDate = dateFormat.format(time);
+                List newList = new List();
+                newList.listName = currentDate;
+                MainActivity.db.listDao().insertAll(newList);
+
+                //navigate to list view
+                Bundle bundle = new Bundle();
+                bundle.putString("listName", currentDate);
                 NavController navController = Navigation.findNavController(view);
-                navController.navigate(R.id.newList);
+                navController.navigate(R.id.newList, bundle);
             }
         });
 

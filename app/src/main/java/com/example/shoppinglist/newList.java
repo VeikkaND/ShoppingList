@@ -16,7 +16,11 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.shoppinglist.adapters.ItemAdapter;
+import com.example.shoppinglist.entities.ListItem;
 
 import java.util.Arrays;
 
@@ -27,6 +31,7 @@ public class newList extends Fragment {
     Button addItemButton;
     Spinner itemSpinner;
     EditText etAmount;
+    String listName;
 
     public newList() {
         super(R.layout.fragment_new_list);
@@ -71,10 +76,18 @@ public class newList extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        listName = getArguments().getString("listName");
         RecyclerView rvItems = view.findViewById(R.id.rvItems);
-        //ListItem[] dataset = MainActivity.db.listItemDao().findByListId();
-        // TODO finish recyclerview
+        ListItem[] dataset = MainActivity.db.listItemDao().findByListId(MainActivity.db.listDao().getListId(listName));
 
+        rvItems.setAdapter(new ItemAdapter(dataset));
+        rvItems.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        inputForm();
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    private void inputForm() {
         String[] names = MainActivity.db.itemDao().getAllNames();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(),
                 android.R.layout.simple_spinner_dropdown_item, names);

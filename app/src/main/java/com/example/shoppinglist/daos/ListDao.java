@@ -18,6 +18,10 @@ public interface ListDao {
     @Query("SELECT * FROM list WHERE listId LIKE :id")
     com.example.shoppinglist.entities.List findById(int id);
 
+    // get list id by name
+    @Query("SELECT listId FROM list WHERE list_name LIKE :name")
+    int getListId(String name);
+
     // get list by name
     @Query("SELECT * FROM list WHERE list_name LIKE :name")
     com.example.shoppinglist.entities.List findByName(String name);

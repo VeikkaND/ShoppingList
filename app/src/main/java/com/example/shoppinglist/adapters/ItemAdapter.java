@@ -7,8 +7,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.shoppinglist.ListItem;
 import com.example.shoppinglist.R;
+import com.example.shoppinglist.entities.ListItem;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
@@ -42,8 +42,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        viewHolder.getItemName().setText(localDataset[position].getItemName());
-        viewHolder.getItemUnit().setText(localDataset[position].getItemUnit());
+        viewHolder.getItemName().setText(localDataset[position].itemName);
+        viewHolder.getItemUnit().setText(localDataset[position].itemUnit);
     }
 
     @Override
