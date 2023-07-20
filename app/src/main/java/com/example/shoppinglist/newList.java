@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class newList extends Fragment {
 
@@ -47,5 +48,11 @@ public class newList extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        RecyclerView rvItems = view.findViewById(R.id.rvItems);
+        //ListItem[] dataset = MainActivity.db.listItemDao().findByListId();
     }
 }

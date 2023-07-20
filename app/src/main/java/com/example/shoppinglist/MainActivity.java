@@ -13,7 +13,7 @@ import com.example.shoppinglist.entities.Item;
 
 public class MainActivity extends AppCompatActivity {
 
-    AppDatabase db;
+    public static AppDatabase db;
     ListDao listDao;
     ItemDao itemDao;
     ListItemDao listItemDao;
