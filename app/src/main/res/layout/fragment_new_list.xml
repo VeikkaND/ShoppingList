@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,5 +32,27 @@
             android:layout_weight="1"
             android:text="@string/newItemButton" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/listLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout">
+
+        <Button
+            android:id="@+id/addItemToListButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/addItemButton" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvItems"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
