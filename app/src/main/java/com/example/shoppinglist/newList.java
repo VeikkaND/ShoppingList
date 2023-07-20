@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shoppinglist.adapters.ItemAdapter;
+import com.example.shoppinglist.daos.ListItemDao;
 import com.example.shoppinglist.entities.ListItem;
 
 import java.util.Arrays;
@@ -32,6 +33,9 @@ public class newList extends Fragment {
     Spinner itemSpinner;
     EditText etAmount;
     String listName;
+    String spinnerItem = "";
+
+    RecyclerView rvItems;
 
     public newList() {
         super(R.layout.fragment_new_list);
@@ -67,7 +71,17 @@ public class newList extends Fragment {
         addItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // do something
+                // don't save items with missing info to DB
+                if(!spinnerItem.equals("") && !etAmount.getText().toString().equals("")) {
+                    ListItem newListItem = new ListItem();
+                    newListItem.itemName = spinnerItem;
+                    newListItem.itemAmount = Float.parseFloat(etAmount.getText().toString());
+                    newListItem.itemUnit = etAmount.getHint().toString();
+                    newListItem.listId = MainActivity.db.listDao().getListId(listName);
+
+                    MainActivity.db.listItemDao().insertAll(newListItem);
+                    rvItems.getAdapter().notifyDataSetChanged();
+                }
             }
         });
 
@@ -77,7 +91,7 @@ public class newList extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         listName = getArguments().getString("listName");
-        RecyclerView rvItems = view.findViewById(R.id.rvItems);
+        rvItems = view.findViewById(R.id.rvItems);
         ListItem[] dataset = MainActivity.db.listItemDao().findByListId(MainActivity.db.listDao().getListId(listName));
 
         rvItems.setAdapter(new ItemAdapter(dataset));
@@ -98,6 +112,7 @@ public class newList extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
                 etAmount.setHint(MainActivity.db.itemDao().getUnit(item));
+                spinnerItem = item;
             }
 
             @Override
