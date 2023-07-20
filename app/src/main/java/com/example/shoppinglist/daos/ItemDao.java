@@ -1,5 +1,7 @@
 package com.example.shoppinglist.daos;
 
+import android.database.Cursor;
+
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -15,6 +17,14 @@ public interface ItemDao {
     //get all items
     @Query("SELECT * FROM item")
     Item[] getAll();
+
+    //get all item names as strings
+    @Query("SELECT item_name FROM item")
+    String[] getAllNames();
+
+    //get unit for item
+    @Query("SELECT unit_type FROM item WHERE item_name LIKE :name")
+    String getUnit(String name);
 
     //get item by id
     @Query("SELECT * FROM item WHERE itemId LIKE :id")

@@ -44,11 +44,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerLayout">
 
-        <Button
-            android:id="@+id/addItemToListButton"
+        <LinearLayout
+            android:id="@+id/newItemFormLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/addItemButton" />
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/itemSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etNewItemAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:text="" />
+
+            <Button
+                android:id="@+id/addItemToListButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/addItemButton" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvItems"

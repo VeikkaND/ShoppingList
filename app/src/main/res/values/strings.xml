@@ -6,9 +6,11 @@
     <string name="newItemButton">New Item</string>
     <string name="backButton">Back</string>
     <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
     <string name="name">Name:</string>
     <string name="unit">Unit:</string>
     <string name="nameInput">Name of the item</string>
     <string name="unitInput">Unit</string>
     <string name="addItemButton">Add Item</string>
+    <string name="addItemText">Add New Item</string>
 </resources>

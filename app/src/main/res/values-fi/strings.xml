@@ -9,4 +9,5 @@
     <string name="nameInput">Tuotteen nimi</string>
     <string name="unitInput">Yksikkö</string>
     <string name="addItemButton">Lisää tuote</string>
+    <string name="addItemText">Lisää uusi tuote</string>
 </resources>
