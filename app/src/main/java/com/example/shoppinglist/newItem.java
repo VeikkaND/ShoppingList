@@ -44,8 +44,11 @@ public class newItem extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("listName", getArguments().getString("listName"));
+
                 NavController navController = Navigation.findNavController(view);
-                navController.navigate(R.id.newList);
+                navController.navigate(R.id.newList, bundle);
             }
         });
         addButton.setOnClickListener(new View.OnClickListener() {
