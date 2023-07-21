@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.shoppinglist.entities.List;
 
@@ -29,6 +30,10 @@ public interface ListDao {
     // new list
     @Insert
     void insertAll(com.example.shoppinglist.entities.List... lists);
+
+    // update list
+    @Update
+    void updateList(List... lists);
 
     // delete list
     @Delete

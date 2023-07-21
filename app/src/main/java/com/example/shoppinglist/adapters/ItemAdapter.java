@@ -1,5 +1,6 @@
 package com.example.shoppinglist.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shoppinglist.MainActivity;
 import com.example.shoppinglist.R;
+import com.example.shoppinglist.entities.List;
 import com.example.shoppinglist.entities.ListItem;
+
+import java.util.Arrays;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
@@ -26,6 +30,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             listItem.done = b;
 
             MainActivity.db.listItemDao().updateListItem(listItem);
+
+            // update progress
+            int listId = listItem.listId;
+            boolean[] dones = MainActivity.db.listItemDao().getDones(listId);
+            int trues = 0;
+            for(boolean bool : dones) {
+                if(bool) {
+                    trues++;
+                }
+            }
+            List list = MainActivity.db.listDao().findById(listId);
+            list.doneProgress = Math.round((float) trues/dones.length * 100);
+            MainActivity.db.listDao().updateList(list);
         }
     };
 

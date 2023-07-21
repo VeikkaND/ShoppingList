@@ -21,13 +21,15 @@ public interface ListItemDao {
     @Query("SELECT * FROM listitem WHERE listItemId LIKE :id")
     ListItem findById(int id);
 
-    // get listItemId with name & unit
+    // get all "done"s with listId
+    @Query("SELECT done FROM listitem WHERE list_id LIKE :listId")
+    boolean[] getDones(int listId);
 
     // new listItem
     @Insert
     void insertAll(ListItem... listItems);
 
-    // change done -status
+    // update listItem
     @Update
     void updateListItem(ListItem... listItems);
 

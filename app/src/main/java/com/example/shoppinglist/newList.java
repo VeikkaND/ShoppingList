@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -34,7 +35,7 @@ public class newList extends Fragment {
     EditText etAmount;
     String listName;
     String spinnerItem = "";
-    int itemCount;
+    ProgressBar progressBar;
 
     RecyclerView rvItems;
 
@@ -52,6 +53,7 @@ public class newList extends Fragment {
         addItemButton = view.findViewById(R.id.addItemToListButton);
         itemSpinner = view.findViewById(R.id.itemSpinner);
         etAmount = view.findViewById(R.id.etNewItemAmount);
+        progressBar = view.findViewById(R.id.pbProgress);
 
         newItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,12 +101,12 @@ public class newList extends Fragment {
         rvItems = view.findViewById(R.id.rvItems);
         ListItem[] dataset = MainActivity.db.listItemDao()
                 .findByListId(MainActivity.db.listDao().getListId(listName));
-        itemCount = dataset.length;
 
         rvItems.setAdapter(new ItemAdapter(dataset));
         rvItems.setLayoutManager(new LinearLayoutManager(getContext()));
 
         inputForm();
+        progressBar.setProgress(MainActivity.db.listDao().findByName(listName).doneProgress);
         super.onViewCreated(view, savedInstanceState);
     }
 

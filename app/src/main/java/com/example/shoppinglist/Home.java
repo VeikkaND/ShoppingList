@@ -46,6 +46,7 @@ public class Home extends Fragment {
                 String currentDate = dateFormat.format(time);
                 List newList = new List();
                 newList.listName = currentDate;
+                newList.doneProgress = 0;
                 MainActivity.db.listDao().insertAll(newList);
 
                 //navigate to list view

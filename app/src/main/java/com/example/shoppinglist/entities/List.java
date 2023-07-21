@@ -12,4 +12,6 @@ public class List {
     @ColumnInfo(name = "list_name")
     public String listName;
 
+    @ColumnInfo(name = "done_progress")
+    public int doneProgress;
 }
