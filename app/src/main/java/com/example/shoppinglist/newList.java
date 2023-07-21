@@ -100,16 +100,29 @@ public class newList extends Fragment {
             public void onClick(View view) {
                 // don't save items with missing info to DB
                 if(!spinnerItem.equals("") && !etAmount.getText().toString().equals("")) {
+                    int listId = MainActivity.db.listDao().getListId(listName);
                     ListItem newListItem = new ListItem();
                     newListItem.itemName = spinnerItem;
                     newListItem.itemAmount = Float.parseFloat(etAmount.getText().toString());
                     newListItem.itemUnit = etAmount.getHint().toString();
-                    newListItem.listId = MainActivity.db.listDao().getListId(listName);
+                    newListItem.listId = listId;
                     newListItem.done = false;
 
                     MainActivity.db.listItemDao().insertAll(newListItem);
 
-                    // refresh
+                    //update progress
+                    boolean[] dones = MainActivity.db.listItemDao().getDones(listId);
+                    int trues = 0;
+                    for(boolean bool : dones) {
+                        if(bool) {
+                            trues++;
+                        }
+                    }
+                    List list = MainActivity.db.listDao().findById(listId);
+                    list.doneProgress = Math.round((float) trues/dones.length * 100);
+                    MainActivity.db.listDao().updateList(list);
+
+                    // refresh view (list)
                     Bundle bundle = new Bundle();
                     bundle.putString("listName", listName);
                     NavController navController = Navigation.findNavController(view);
