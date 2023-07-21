@@ -108,7 +108,12 @@ public class newList extends Fragment {
                     newListItem.done = false;
 
                     MainActivity.db.listItemDao().insertAll(newListItem);
-                    rvItems.getAdapter().notifyDataSetChanged();
+
+                    // refresh
+                    Bundle bundle = new Bundle();
+                    bundle.putString("listName", listName);
+                    NavController navController = Navigation.findNavController(view);
+                    navController.navigate(R.id.newList, bundle);
                 }
             }
         });

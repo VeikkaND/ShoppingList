@@ -82,9 +82,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         viewHolder.getDone().setTag(localDataset[position].listItemId);
         viewHolder.getItemName().setText(localDataset[position].itemName);
-        viewHolder.getItemUnit().setText(localDataset[position].itemUnit);
+        viewHolder.getItemUnit().setText(formatAmount(position));
         viewHolder.getDone().setChecked(localDataset[position].done);
         viewHolder.getDone().setOnCheckedChangeListener(CheckChangeListener);
+    }
+
+    private String formatAmount(int position) {
+        String amount = Float.toString(localDataset[position].itemAmount);
+
+        if(amount.endsWith(".0")) {
+            amount = amount.replace(".0", "");
+        }
+
+        return amount + " " + localDataset[position].itemUnit;
     }
 
     @Override

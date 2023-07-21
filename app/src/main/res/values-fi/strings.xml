@@ -11,4 +11,8 @@
     <string name="unitInput">Yksikkö</string>
     <string name="addItemButton">Lisää tuote</string>
     <string name="addItemText">Lisää uusi tuote</string>
+    <string name="deleteListButton">Poista</string>
+    <string name="deleteListMessage">Poista lista %1$s ?</string>
+    <string name="dialogConfirm">Hyväksy</string>
+    <string name="dialogCancel">Peru</string>
 </resources>
