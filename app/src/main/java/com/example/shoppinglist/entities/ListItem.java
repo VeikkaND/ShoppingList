@@ -20,4 +20,7 @@ public class ListItem {
 
     @ColumnInfo(name = "item_unit")
     public String itemUnit;
+
+    @ColumnInfo(name = "done")
+    public boolean done;
 }

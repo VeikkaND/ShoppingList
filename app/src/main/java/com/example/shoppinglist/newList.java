@@ -34,6 +34,7 @@ public class newList extends Fragment {
     EditText etAmount;
     String listName;
     String spinnerItem = "";
+    int itemCount;
 
     RecyclerView rvItems;
 
@@ -81,6 +82,7 @@ public class newList extends Fragment {
                     newListItem.itemAmount = Float.parseFloat(etAmount.getText().toString());
                     newListItem.itemUnit = etAmount.getHint().toString();
                     newListItem.listId = MainActivity.db.listDao().getListId(listName);
+                    newListItem.done = false;
 
                     MainActivity.db.listItemDao().insertAll(newListItem);
                     rvItems.getAdapter().notifyDataSetChanged();
@@ -95,7 +97,9 @@ public class newList extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         listName = getArguments().getString("listName");
         rvItems = view.findViewById(R.id.rvItems);
-        ListItem[] dataset = MainActivity.db.listItemDao().findByListId(MainActivity.db.listDao().getListId(listName));
+        ListItem[] dataset = MainActivity.db.listItemDao()
+                .findByListId(MainActivity.db.listDao().getListId(listName));
+        itemCount = dataset.length;
 
         rvItems.setAdapter(new ItemAdapter(dataset));
         rvItems.setLayoutManager(new LinearLayoutManager(getContext()));
