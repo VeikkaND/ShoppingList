@@ -4,6 +4,7 @@
     <string name="newItemButton">Uusi tuote</string>
     <string name="backButton">Takaisin</string>
     <string name="add">Lisää</string>
+    <string name="cancel">peruuta</string>
     <string name="name">Nimi:</string>
     <string name="unit">Yksikkö:</string>
     <string name="nameInput">Tuotteen nimi</string>
