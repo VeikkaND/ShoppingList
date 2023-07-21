@@ -13,6 +13,10 @@
     <string name="unitInput">Unit</string>
     <string name="addItemButton">Add Item</string>
     <string name="addItemText">Add New Item</string>
+    <string name="deleteListButton">Delete</string>
+    <string name="deleteListMessage">Delete list %1$s ?</string>
+    <string name="dialogConfirm">Confirm</string>
+    <string name="dialogCancel">Cancel</string>
 
     <item name="textview" type="id"/>
 </resources>

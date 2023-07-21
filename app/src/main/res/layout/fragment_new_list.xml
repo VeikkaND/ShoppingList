@@ -26,6 +26,13 @@
             android:text="@string/backButton" />
 
         <Button
+            android:id="@+id/deleteListButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/deleteListButton" />
+
+        <Button
             android:id="@+id/newItemButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,6 +43,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             }
             List list = MainActivity.db.listDao().findById(listId);
             list.doneProgress = Math.round((float) trues/dones.length * 100);
+            // TODO refresh progress bar somehow(???)
             MainActivity.db.listDao().updateList(list);
         }
     };
@@ -49,7 +51,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView itemName;
         private final TextView itemUnit;
-
         private final CheckBox done;
 
         public ViewHolder(View view) {

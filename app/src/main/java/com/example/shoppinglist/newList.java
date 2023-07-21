@@ -22,13 +22,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shoppinglist.adapters.ItemAdapter;
 import com.example.shoppinglist.daos.ListItemDao;
+import com.example.shoppinglist.entities.List;
 import com.example.shoppinglist.entities.ListItem;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Arrays;
 
 public class newList extends Fragment {
 
     Button newItemButton;
+    Button deleteListButton;
     Button backButton;
     Button addItemButton;
     Spinner itemSpinner;
@@ -49,6 +52,7 @@ public class newList extends Fragment {
         View view = inflater.inflate(R.layout.fragment_new_list, container, false);
 
         newItemButton = view.findViewById(R.id.newItemButton);
+        deleteListButton = view.findViewById(R.id.deleteListButton);
         backButton = view.findViewById(R.id.backButton);
         addItemButton = view.findViewById(R.id.addItemToListButton);
         itemSpinner = view.findViewById(R.id.itemSpinner);
@@ -63,6 +67,23 @@ public class newList extends Fragment {
 
                 NavController navController = Navigation.findNavController(view);
                 navController.navigate(R.id.newItem, bundle);
+            }
+        });
+
+        deleteListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext());
+
+                builder.setMessage(getResources()
+                        .getString(R.string.deleteListMessage, listName));
+
+                builder.setPositiveButton(R.string.dialogConfirm,
+                        ((dialogInterface, i) -> deleteList(view)));
+
+                builder.setNegativeButton(R.string.dialogCancel, (dialogInterface, i) -> {});
+
+                builder.show();
             }
         });
 
@@ -93,6 +114,24 @@ public class newList extends Fragment {
         });
 
         return view;
+    }
+
+    private void deleteList(View view) {
+        int listId = MainActivity.db.listDao().getListId(listName);
+        List list = MainActivity.db.listDao().findById(listId);
+
+        // delete list
+        MainActivity.db.listDao().delete(list);
+
+        // delete ListItems associated with list
+        ListItem[] listItems = MainActivity.db.listItemDao().findByListId(listId);
+        for(ListItem listItem : listItems) {
+            MainActivity.db.listItemDao().delete(listItem);
+        }
+
+        // navigate back to home
+        NavController navController = Navigation.findNavController(view);
+        navController.navigate(R.id.home2);
     }
 
     @Override
