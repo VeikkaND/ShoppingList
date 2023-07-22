@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="newButton">Uusi</string>
+    <string name="newItemButton">Uusi tuote</string>
+    <string name="backButton">Takaisin</string>
+    <string name="add">Lisää</string>
+    <string name="cancel">peruuta</string>
+    <string name="name">Nimi:</string>
+    <string name="unit">Yksikkö:</string>
+    <string name="nameInput">Tuotteen nimi</string>
+    <string name="unitInput">Yksikkö</string>
+    <string name="addItemButton">Lisää tuote</string>
+    <string name="addItemText">Lisää uusi tuote</string>
+    <string name="deleteListButton">Poista</string>
+    <string name="deleteListMessage">Poista lista %1$s ?</string>
+    <string name="dialogConfirm">Hyväksy</string>
+    <string name="dialogCancel">Peru</string>
+</resources>
