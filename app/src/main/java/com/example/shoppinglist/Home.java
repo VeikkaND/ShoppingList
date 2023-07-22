@@ -19,7 +19,9 @@ import com.example.shoppinglist.adapters.ListAdapter;
 import com.example.shoppinglist.entities.List;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 
 public class Home extends Fragment {
@@ -64,6 +66,8 @@ public class Home extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstance) {
         rvLists = view.findViewById(R.id.rvLists);
         List[] dataset = MainActivity.db.listDao().getAll();
+
+        Collections.reverse(Arrays.asList(dataset));
 
         rvLists.setAdapter(new ListAdapter(dataset));
         rvLists.setLayoutManager(new LinearLayoutManager(getContext()));
