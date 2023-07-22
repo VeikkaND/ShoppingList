@@ -10,9 +10,21 @@ import com.example.shoppinglist.entities.Item;
 import com.example.shoppinglist.entities.List;
 import com.example.shoppinglist.entities.ListItem;
 
+/**
+ * The App's database
+ *
+ * @author Veikka Nevala
+ *
+ */
 @Database(entities = {List.class, Item.class, ListItem.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
+
+    /** Item Data Access Object */
     public abstract ItemDao itemDao();
+
+    /** List Data Access Object */
     public abstract ListDao listDao();
+
+    /** ListItem Data Access Object */
     public abstract ListItemDao listItemDao();
 }

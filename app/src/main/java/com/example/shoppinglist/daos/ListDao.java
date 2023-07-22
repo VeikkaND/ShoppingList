@@ -8,34 +8,64 @@ import androidx.room.Update;
 
 import com.example.shoppinglist.entities.List;
 
+/**
+ * Data Access Object for List
+ *
+ * @author Veikka Nevala
+ *
+ */
 @Dao
 public interface ListDao {
 
-    // get all lists
+    /**
+     * Selects all the lists
+     * @return List[] lists
+     */
     @Query("SELECT * FROM list")
     List[] getAll();
 
-    // get list by id
+    /**
+     * Selects a list with it's ID
+     * @param id int ListId
+     * @return List
+     */
     @Query("SELECT * FROM list WHERE listId LIKE :id")
     com.example.shoppinglist.entities.List findById(int id);
 
-    // get list id by name
+    /**
+     * Selects the id of a list
+     * @param name String list name
+     * @return int ListId
+     */
     @Query("SELECT listId FROM list WHERE list_name LIKE :name")
     int getListId(String name);
 
-    // get list by name
+    /**
+     * Selects a list with a name
+     * @param name String list name
+     * @return List list
+     */
     @Query("SELECT * FROM list WHERE list_name LIKE :name")
     com.example.shoppinglist.entities.List findByName(String name);
 
-    // new list
+    /**
+     * Creates a new list
+     * @param lists List new list
+     */
     @Insert
     void insertAll(com.example.shoppinglist.entities.List... lists);
 
-    // update list
+    /**
+     * Updates a list
+     * @param lists List updated list
+     */
     @Update
     void updateList(List... lists);
 
-    // delete list
+    /**
+     * Deletes a list
+     * @param list List list to delete
+     */
     @Delete
     void delete(com.example.shoppinglist.entities.List list);
 }

@@ -28,24 +28,64 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Arrays;
 
+/**
+ * Fragment for list overview
+ *
+ * @author Veikka Nevala
+ *
+ */
 public class newList extends Fragment {
 
+    /** Button for creating a new item to use */
     Button newItemButton;
+
+    /** Button for deleting the list */
     Button deleteListButton;
+
+    /** Button for returning back to Home fragment */
     Button backButton;
+
+    /** Button for adding an item to the list */
     Button addItemButton;
+
+    /** Dropdown selection menu for choosing an item to add */
     Spinner itemSpinner;
+
+    /** Text input field for an amount of the new item */
     EditText etAmount;
+
+    /** Name of the list */
     String listName;
+
+    /** Name of the chosen item from the dropdown menu */
     String spinnerItem = "";
+
+    /** Progress bar to show collected items progress */
     ProgressBar progressBar;
 
+    /** RecyclerView for items of the list */
     RecyclerView rvItems;
 
+    /**
+     * Constructor of the fragment
+     */
     public newList() {
         super(R.layout.fragment_new_list);
     }
 
+    /**
+     * Finds the fragments elements and binds listeners to the buttons
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return View view
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -134,6 +174,10 @@ public class newList extends Fragment {
         return view;
     }
 
+    /**
+     * Deletes the current list and its' ListItems from the database
+     * @param view View
+     */
     private void deleteList(View view) {
         int listId = MainActivity.db.listDao().getListId(listName);
         List list = MainActivity.db.listDao().findById(listId);
@@ -152,6 +196,13 @@ public class newList extends Fragment {
         navController.navigate(R.id.home2);
     }
 
+    /**
+     * Fills the RecyclerView with ListItems of the list
+     *
+     * @param view The View returned by {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     */
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         listName = getArguments().getString("listName");
@@ -167,6 +218,9 @@ public class newList extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    /**
+     * Initiates the form for adding new items to the list
+     */
     private void inputForm() {
         String[] names = MainActivity.db.itemDao().getAllNames();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(),

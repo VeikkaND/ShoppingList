@@ -24,14 +24,40 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 
+/**
+ * Home fragment for lists overview
+ *
+ * @author Veikka Nevala
+ *
+ */
 public class Home extends Fragment {
+
+    /** Button for creating new lists */
     Button newButton;
+
+    /** RecyclerView for created lists */
     RecyclerView rvLists;
 
+    /**
+     * Constructor for the fragment
+     */
     public Home() {
         super(R.layout.fragment_home);
     }
 
+    /**
+     * Finds the new list button and binds a listener to it
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return View view
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -62,6 +88,13 @@ public class Home extends Fragment {
         return view;
     }
 
+    /**
+     * Fills the RecyclerView with lists and initiates it
+     *
+     * @param view The View returned by {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
+     * @param savedInstance If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     */
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstance) {
         rvLists = view.findViewById(R.id.rvLists);
