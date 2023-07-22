@@ -25,6 +25,7 @@ import java.util.Arrays;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     private ListItem[] localDataset;
+    private ProgressBar progressBar;
 
     CompoundButton.OnCheckedChangeListener CheckChangeListener = new CompoundButton.OnCheckedChangeListener() {
         @Override
@@ -46,8 +47,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                 }
             }
             List list = MainActivity.db.listDao().findById(listId);
-            list.doneProgress = Math.round((float) trues/dones.length * 100);
-            // TODO refresh progress bar somehow(???)
+            int progress = Math.round((float) trues/dones.length * 100);
+            list.doneProgress = progress;
+            progressBar.setProgress(progress);
             MainActivity.db.listDao().updateList(list);
         }
     };
@@ -67,12 +69,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
         public TextView getItemName() { return itemName; }
         public TextView getItemUnit() { return itemUnit; }
-
         public CheckBox getDone() { return done; }
     }
 
-    public ItemAdapter(ListItem[] dataset) {
+    public ItemAdapter(ListItem[] dataset, ProgressBar pb) {
         localDataset = dataset;
+        progressBar = pb;
     }
 
     @Override

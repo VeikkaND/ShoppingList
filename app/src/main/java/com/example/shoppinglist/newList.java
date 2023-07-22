@@ -159,7 +159,7 @@ public class newList extends Fragment {
         ListItem[] dataset = MainActivity.db.listItemDao()
                 .findByListId(MainActivity.db.listDao().getListId(listName));
 
-        rvItems.setAdapter(new ItemAdapter(dataset));
+        rvItems.setAdapter(new ItemAdapter(dataset, view.findViewById(R.id.pbProgress)));
         rvItems.setLayoutManager(new LinearLayoutManager(getContext()));
 
         inputForm();
